@@ -1,0 +1,28 @@
+out_direc: W:\RunLog\2025\10\12\20251012-0026\cat3
+Scan variables:
+	GlobalMotVariables.MotExtAmplitudeCompressed (Real)
+	GlobalImagingVariables.RamanImagingNumberOfPulseTrains (Real)
+	LocalVariables.EarthMagneticFieldVerticalOffset (Real)
+	LocalVariables.EarthMagneticFieldEastWestOffset (Real)
+	GlobalImagingVariables.RamanImagingDuration (Real)
+	GlobalScienceChamberEvaporationVariables.AllDipoleEvaporationDimpleFinalPower (Real)
+	GlobalLatticeVariables.LoadingGradientHighBiasEvaporationDimpleFinalPower (Real)
+	GlobalMotVariables.MotRepumpExtAmplitudeCompressed (Real)
+	GlobalImagingVariables.RamanImagingPumpThreeHalvesExtAmplitude (Real)
+	LocalVariables.ImagingBlowOutID (Real)
+	GlobalImagingVariables.RamanSwitchExtAmplitude (Real)
+	GlobalImagingVariables.RamanImagingTwoPhotonDetuning (Real)
+	GlobalImagingVariables.RamanImagingBetweenFramesNumberOfPulseTrains (Real)
+	GlobalImagingVariables.RamanImagingPumpDetuning (Real)
+	GlobalImagingVariables.RamanImagingPumpDuration (Real)
+	GlobalMotVariables.MotCoilCurrentInitial (Real)
+	GlobalMotVariables.MotDetuningCompressed (Real)
+	GlobalImagingVariables.RamanImagingSinglePassExtAmplitude (Real)
+	GlobalMotVariables.MotDetuningInitial (Real)
+Binarization:
+	window: 10
+	level_percent: 0.1
+	grpvar: LocalVariables.ImagingBlowOutID
+	Thresholds:
+		(0, 0.0): 0.733397260250131
+		(1, 0.0): 0.7253554986929657

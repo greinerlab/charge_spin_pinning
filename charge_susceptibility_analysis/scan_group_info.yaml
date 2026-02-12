@@ -1,0 +1,216 @@
+# STRUCTURE:
+# each entry is a set of scans taken 'together', e.g. background scans taken to go with a dataset
+# for each scan group, need to specify the 'data' scan where the modulation data is, also the 
+# 'density' scan that calibrates dmd1 power vs density, also 'thermometry' scan that tells what
+# temperature the data is at via AFM thermometry, and a 'background' scan to tell the analysis
+# code where to look for background data
+# temp_var is what variable to use for temperature/hold time since we have changed what variable
+# controls this (LatticeDMDPreQuenchHoldTime vs NematicLatticeModulationPreHoldTime)
+# is_doublon_resolved controls whether or not doublon-resolved analysis for the density happens,
+# and should be set based on whether we actually did doublon resolution
+
+U8_Oct_3_p_78:
+  comment: "all k at p~0.78"
+  data:
+  - '20251003-0005'
+  - '20251003-0010'
+  - '20251003-0015'
+  - '20251003-0021'
+  thermometry_power: 2.3e-3
+  is_doublon_resolved: 1
+  imaging_calibration:
+  - '20251003-0022'
+
+U8_Oct_4_p_75:
+  comment: "all k at p~0.75"
+  data:
+  - '20251004-0020'
+  - '20251004-0025'
+  - '20251004-0030'
+  thermometry_power: 2.3e-3
+  is_doublon_resolved: 1
+  imaging_calibration:
+  - '20251003-0022'
+
+U8_Oct_5_p_72:
+  comment: "all k at p~0.72"
+  data:
+  - '20251005-0004'
+  - '20251005-0009'
+  thermometry_power: 2.3e-3
+  is_doublon_resolved: 1
+  imaging_calibration:
+  - '20251003-0022'
+
+U8_Oct_5_p_81:
+  comment: "all k at p~0.81"
+  data:
+  - '20251005-0020'
+  - '20251005-0025'
+  - '20251005-0030'
+  thermometry_power: 2.3e-3
+  is_doublon_resolved: 1
+  imaging_calibration:
+  - '20251003-0022'
+
+U8_Oct_6_p_69:
+  comment: "all k at p~0.69"
+  data:
+  - '20251006-0001'
+  - '20251006-0006'
+  - '20251006-0011'
+  thermometry_power: 2.3e-3
+  is_doublon_resolved: 1
+  imaging_calibration:
+  - '20251003-0022'
+
+U8_Oct_6_p_83:
+  comment: "all k at p~0.83"
+  data:
+  - '20251006-0017'
+  - '20251006-0022'
+  - '20251006-0027'
+  thermometry_power: 2.3e-3
+  is_doublon_resolved: 1
+  imaging_calibration:
+  - '20251003-0022'
+
+U8_Oct_8_half_filling:
+  comment: "all k at half-filling"
+  data:
+  - '20251007-0039'
+  - '20251007-0040'
+  - '20251008-0003'
+  - '20251008-0005'
+  - '20251008-0010'
+  - '20251008-0015'
+  thermometry_power: 2.3e-3
+  is_doublon_resolved: 1
+  imaging_calibration:
+  - '20251007-0020'
+
+U8_Oct_9_p_58:
+  comment: "all k at p~0.58"
+  data:
+  - '20251009-0003'
+  - '20251009-0008'
+  - '20251009-0013'
+  thermometry_power: 2.3e-3
+  is_doublon_resolved: 1
+  imaging_calibration:
+  - '20251007-0020'
+
+U8_Oct_9_p_58_v2:
+  comment: "all k at p~0.58, only taking singles"
+  data:
+  - '20251009-0020'
+  - '20251009-0025'
+  thermometry_power: 2.3e-3
+  is_doublon_resolved: 0
+  imaging_calibration:
+  - '20251007-0020'
+
+  
+U8_Oct_10_p_85:
+  comment: "all k at p~0.65"
+  data:
+  - '20251010-0003'
+  - '20251010-0008'
+  - '20251010-0013'
+  - '20251010-0018'
+  thermometry_power: 2.3e-3
+  is_doublon_resolved: 1
+  imaging_calibration:
+  - '20251007-0020'
+
+U8_Oct_10_p_65:
+  comment: "all k at p~0.65"
+  data:
+  - '20251010-0039'
+  - '20251010-0048'
+  - '20251010-0053'
+  thermometry_power: 2.3e-3
+  is_doublon_resolved: 1
+  imaging_calibration:
+  - '20251007-0020'
+
+
+lowU_Oct_11:
+  comment: "all k at 557 G"
+  data:
+  - '20251011-0004'
+  - '20251011-0009'
+  - '20251011-0014'
+  - '20251011-0019'
+  - '20251011-0024'
+  - '20251011-0029'
+  - '20251011-0034'
+  - '20251011-0039'
+  - '20251012-0004'
+  - '20251012-0009'
+  - '20251012-0014'
+  Bfield: 557
+  thermometry_power: 2.3e-3
+  is_doublon_resolved: 1
+  imaging_calibration:
+  - '20251012-0026'
+
+
+
+U8_Oct_12_p_83:
+  comment: "all k at p~0.83"
+  data:
+  - '20251012-0033'
+  - '20251012-0038'
+  - '20251012-0043'
+  - '20251013-0004'
+  - '20251013-0009'
+  - '20251013-0014'
+  thermometry_power: 2.3e-3
+  is_doublon_resolved: 1
+  imaging_calibration:
+  - '20251012-0026'
+
+
+U8_Oct_18_p_83:
+  comment: "all k at p~0.83"
+  data:
+  - '20251018-0038'
+  - '20251018-0043'
+  - '20251019-0004'
+  - '20251019-0009'
+  - '20251019-0014'
+  - '20251019-0019'
+  thermometry_power: 2.3e-3
+  is_doublon_resolved: 2
+  imaging_calibration:
+  - '20251012-0026'
+
+
+U8_Oct_19_p_83_hot:
+  comment: "all k at p~0.83, 300ms heating"
+  data:
+  - '20251019-0040'
+  - '20251020-0003'
+  - '20251020-0008'
+  - '20251020-0013'
+  - '20251020-0026'
+  thermometry_power: 2.3e-3
+  is_doublon_resolved: 2
+  imaging_calibration:
+  - '20251012-0026'
+
+
+U8_Oct_21_p_83_cold:
+  comment: "all k at p~0.83, 300ms heating"
+  data:
+  - '20251021-0022'
+  - '20251021-0038'
+  - '20251021-0043'
+  - '20251022-0004'
+  - '20251022-0009'
+  - '20251022-0014'
+  thermometry_power: 2.3e-3
+  is_doublon_resolved: 2
+  imaging_calibration:
+  - '20251012-0026'

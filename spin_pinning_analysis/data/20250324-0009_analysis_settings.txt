@@ -1,0 +1,44 @@
+out_direc: W:\RunLog\2025\03\24\20250324-0009\cat3
+Scan variables:
+	GlobalLatticeVariables2.LoadingGradientHighBiasEvaporationDimpleFinalPower (Real)
+	GlobalLatticeVariables2.LoadingGradientDimpleLoadingPower (Real)
+	GlobalLatticeVariables2.BandGapMeasurementModulationFrequency (Real)
+	GlobalLatticeVariables2.PhysicsSplitRadialLoadingField (Real)
+	GlobalLatticeVariables2.CleanupBandInsulatorAccordionPower (Real)
+	GlobalLatticeVariables2.LoadWithDmd0InitialPower (Real)
+	LocalVariables.DMDID (Real)
+	GlobalLatticeVariables2.isUnloadReloadBI (Bool)
+	GlobalLatticeVariables2.LatticeDMDPreQuenchHoldTime (Real)
+	GlobalLatticeVariables2.LoadWithDmd1InitialPower (Real)
+	LocalVariables.ScanID4 (Real)
+	GlobalLatticeVariables2.SecondDMD1RampPower (Real)
+	GlobalLatticeVariables2.FourthDMD0RampPower (Real)
+	LocalVariables.DMDID2 (Real)
+	GlobalLatticeVariables2.Dmd0SecondPatternFilename (String)
+	GlobalLatticeVariables2.LoadingGradientLatticeHoldingTime (Real)
+	GlobalLatticeVariables2.UnloadLatticeDMD1Power (Real)
+	GlobalLatticeVariables2.LoadWithDmd1RampUpTime (Real)
+	GlobalLatticeVariables2.CleanupBandInsulatorGradientCurrent (Real)
+	GlobalLatticeVariables2.LatticeFreezeRampTime (Real)
+	GlobalPulseVariables2.LatticeMicrowaveDuration (Real)
+	LocalVariables.ImagingBlowOutID (Real)
+	GlobalLatticeVariables2.CleanupBandInsulatorDmd1Power (Real)
+	GlobalLatticeVariables2.PhysicsSplitXbarInitialPower (Real)
+	GlobalLatticeVariables2.PhysicsSplitXbarRampTime (Real)
+	GlobalLatticeVariables2.CleanupBandInsulatorGradientRampTime (Real)
+	LocalVariables.XbarFrequency (Real)
+	GlobalLatticeVariables2.FinalStateGradientCurrent (Real)
+	GlobalLatticeVariables2.CleanupBandInsulatorRampTime (Real)
+	LocalVariables.ShotTypeID (Real)
+	GlobalPulseVariables2.LatticeMicrowaveFrequency (Real)
+	GlobalScienceChamberEvaporationVariables2.AllDipoleEvaporationRedSheetFinalPower (Real)
+	GlobalLatticeVariables2.PhysicsSplitYInitialPower (Real)
+	GlobalLatticeVariables2.ThirdDMD1RampPower (Real)
+Binarization:
+	window: 10
+	level_percent: 0.1
+	grpvar: LocalVariables.ImagingBlowOutID
+	Thresholds:
+		0.0: 0.6345595358496806
+		1.0: 0.701653395775816
+		2.0: 0.693788031957456

@@ -1,0 +1,12 @@
+out_direc: \\fileserver2.greinerlab.com\FileServer\RunLog\2025\06\13\20250613-0009\cat3
+Scan variables:
+	GlobalLatticeVariables2.ThirdDMD1RampPower (Real)
+	LocalVariables.ImagingBlowOutID (Real)
+Binarization:
+	window: 10
+	level_percent: 0.1
+	grpvar: LocalVariables.ImagingBlowOutID
+	Thresholds:
+		0.0: 0.8188573120295624
+		1.0: 0.8933657286242789
+		2.0: 0.894785946725593
