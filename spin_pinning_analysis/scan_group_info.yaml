@@ -1,0 +1,252 @@
+# STRUCTURE:
+# each entry is a set of scans taken 'together'
+
+Mar_16_pd6:
+  comment: "mar 16 1/6 doping data"
+  data:
+  - '20250316-0005'
+  is_doublon_resolved: 0
+  period: 6
+  Vpin: 0.5
+  imaging_calibration:
+  - '20250316-0006'
+
+Mar_21_pd10_vp1:
+  comment: "mar 21 period 10, 1t"
+  data:
+  - '20250321-0004'
+  - '20250321-0005'
+  - '20250321-0006'
+  - '20250321-0009'
+  - '20250321-0010'
+  - '20250321-0011'
+  - '20250322-0002'
+  - '20250322-0009' # shorter scan, temp calibration
+  - '20250322-0013'
+  - '20250322-0015'
+  - '20250322-0017'
+  - '20250322-0019'
+  - '20250322-0020'
+  is_doublon_resolved: 0
+  period: 10
+  Vpin: 1.0
+  imaging_calibration:
+  - '20250321-0000'
+  - '20250322-0004'
+
+Mar_22_pd8_vp1:
+  comment: "mar 22 period 8, 1t"
+  data:
+  - '20250322-0036'
+  - '20250323-0000'
+  - '20250323-0006'
+  - '20250323-0007'
+  - '20250323-0013' # shorter, temp check
+  - '20250323-0014' # shorter, temp cehck
+  - '20250323-0016' # shorter, playing with density
+  - '20250323-0020'
+  - '20250324-0004'
+  - '20250324-0009'
+  - '20250324-0011'
+  is_doublon_resolved: 0
+  period: 8
+  Vpin: 1.0
+  imaging_calibration:
+  - '20250323-0002'
+
+Mar_25_pd6_vp1:
+  comment: "mar 25 period 6"
+  data:
+  - '20250325-0006'
+  is_doublon_resolved: 0
+  period: 6
+  Vpin: 1.0
+  imaging_calibration:
+  - '20250323-0002'
+
+Jun_10_pd8_vp1:
+  comment: "jun 10 period 8, 1t, gradienty"
+  data:
+  - '20250610-0041'
+  - '20250610-0042'
+  - '20250610-0044'
+  - '20250610-0046'
+  - '20250610-0052'
+  - '20250610-0057'
+  - '20250611-0004'
+  - '20250611-0009'
+  - '20250611-0014'
+  - '20250611-0019'
+  is_doublon_resolved: 0
+  period: 8
+  Vpin: 1.0
+  imaging_calibration:
+  - '20250624-0023'
+
+
+Jun_11_pd8_vp1:
+  comment: "jun 11 period 8, 1t, gradienty"
+  data:
+  - '20250611-0051'
+  is_doublon_resolved: 0
+  period: 8
+  Vpin: 1.0
+  imaging_calibration:
+  - '20250624-0023'
+
+Jun_12_pd8_vp1:
+  comment: "jun 12 period 8, 1t, flat"
+  data:
+  - '20250612-0014'
+  - '20250612-0019'
+  - '20250612-0024'
+  - '20250613-0004'
+  - '20250613-0009'
+  - '20250613-0014'
+  - '20250613-0015'
+  is_doublon_resolved: 0
+  period: 8
+  Vpin: 1.0
+  imaging_calibration:
+  - '20250624-0023'
+
+Jun_13_pd8_vp0p5:
+  comment: "jun 13 period 8, 0.5t, closed loop failure"
+  data:
+  - '20250613-0036'
+  - '20250614-0004'
+  - '20250614-0009'
+  - '20250614-0014'
+  is_doublon_resolved: 0
+  period: 8
+  Vpin: 0.5
+  imaging_calibration:
+  - '20250624-0023'
+
+Jun_14_pd8_vp0p5:
+  comment: "jun 14 period 8, 0.5t, closed loop working"
+  data:
+  - '20250614-0033'
+  - '20250615-0004'
+  - '20250615-0009'
+  - '20250615-0014'
+  is_doublon_resolved: 0
+  period: 8
+  Vpin: 0.5
+  imaging_calibration:
+  - '20250624-0023'
+
+Jun_15_pd8_vp1p5:
+  comment: "jun 15 period 8, 1.5t, closed loop working"
+  data:
+  - '20250615-0030'
+  - '20250616-0004'
+  - '20250616-0009'
+  - '20250616-0014'
+  is_doublon_resolved: 0
+  period: 8
+  Vpin: 1.5
+  imaging_calibration:
+  - '20250624-0023'
+
+Jun_16_pd8_vp1p5:
+  comment: "jun 16 period 8, 1.5t, closed loop working, doublons"
+  data:
+  - '20250616-0030'
+  - '20250616-0035'
+  - '20250617-0004'
+  - '20250617-0009'
+  is_doublon_resolved: 1
+  period: 8
+  Vpin: 1.5
+  imaging_calibration:
+  - '20250624-0023'
+
+Jun_17_pd8_vp0p5:
+  comment: "jun 17 period 8, 0.5t, closed loop working (!), doublons"
+  data:
+  - '20250617-0045'
+  - '20250618-0004'
+  - '20250618-0009'
+  - '20250618-0014'
+  is_doublon_resolved: 1
+  period: 8
+  Vpin: 0.5
+  imaging_calibration:
+  - '20250624-0023'
+
+Jun_18_pd6_vp1:
+  comment: "jun 18 period 6, 1.0t, closed loop working, doublons"
+  data:
+  - '20250618-0019'
+  - '20250618-0024'
+  - '20250619-0004'
+  is_doublon_resolved: 1
+  period: 6
+  Vpin: 1.0
+  imaging_calibration:
+  - '20250624-0023'
+
+Jun_19_pd6_vp1:
+  comment: "jun 19 period 6, 1.0t, closed loop working, doublons - would combine with jun 18 but crash in between"
+  data:
+  - '20250619-0056'
+  - '20250620-0004'
+  - '20250620-0009'
+  is_doublon_resolved: 1
+  period: 6
+  Vpin: 1.0
+  imaging_calibration:
+  - '20250624-0023'
+
+Jun_20_pd10_vp1:
+  comment: "jun 20 period 10, 1.0t, closed loop working, doublons"
+  data:
+  - '20250620-0014'
+  - '20250620-0019'
+  - '20250621-0004'
+  - '20250621-0009'
+  - '20250621-0014'
+  - '20250621-0019'
+  - '20250622-0004'
+  - '20250622-0009'
+  is_doublon_resolved: 1
+  period: 10
+  Vpin: 1.0
+  imaging_calibration:
+  - '20250624-0023'
+
+Jun_22_pd8_vp1p5:
+  comment: "jun 22 period 8, 1.5t, closed loop working, doublons, versus temperature"
+  data:
+  - '20250622-0030'
+  - '20250622-0035'
+  - '20250623-0004'
+  - '20250623-0009'
+  - '20250623-0014'
+  - '20250623-0015'
+  - '20250623-0018'
+  - '20250623-0023'
+  - '20250624-0004'
+  - '20250624-0009'
+  is_doublon_resolved: 1
+  period: 8
+  Vpin: 1.5
+  imaging_calibration:
+  - '20250624-0023'
+
+Jun_24_pd8_vp0p25:
+  comment: "jun 24 period 8, 0.25t, closed loop working, doublons"
+  data:
+  - '20250624-0024'
+  - '20250624-0029'
+  - '20250625-0004'
+  - '20250625-0009'
+  is_doublon_resolved: 1
+  period: 8
+  Vpin: 0.25
+  imaging_calibration:
+  - '20250625-0019'
+
+
+
