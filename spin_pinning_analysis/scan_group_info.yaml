@@ -261,24 +261,27 @@ Jun_20_pd10_vp1:
   imaging_calibration:
   - '20250624-0023'
 
-# Jun_22_pd8_vp1p5_vs_temp:
-#   comment: "jun 22 period 8, 1.5t, closed loop working, doublons, versus temperature"
-#   data:
-#   - '20250622-0030'
-#   - '20250622-0035'
-#   - '20250623-0004'
-#   - '20250623-0009'
-#   - '20250623-0014'
-#   - '20250623-0015'
-#   - '20250623-0018'
-#   - '20250623-0023'
-#   - '20250624-0004'
-#   - '20250624-0009'
-#   is_doublon_resolved: 1
-#   period: 8
-#   Vpin: 1.5
-#   imaging_calibration:
-#   - '20250624-0023'
+Jun_22_pd8_vp1p5_vs_temp:
+  comment: "jun 22 period 8, 1.5t, closed loop working, doublons, versus temperature"
+  data:
+  - '20250622-0030'
+  - '20250622-0035'
+  - '20250623-0004'
+  - '20250623-0009'
+  - '20250623-0014'
+  - '20250623-0015'
+  - '20250623-0018'
+  - '20250623-0023'
+  - '20250624-0004'
+  - '20250624-0009'
+  is_doublon_resolved: 1
+  period: 8
+  Vpin: 1.5
+  shift_center:
+  - 1
+  - 0
+  imaging_calibration:
+  - '20250624-0023'
 
 Jun_24_pd8_vp0p25:
   comment: "jun 24 period 8, 0.25t, closed loop working, doublons"

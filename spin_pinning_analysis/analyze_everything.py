@@ -111,38 +111,40 @@ def atom_number_postselection(df, amat, is_doublon):
     df = df.reset_index(drop=True)
     return df, amat
 
-def singles_map_analysis(df, amat, is_doublon):
+def singles_map_analysis(df, amat, is_doublon, grpvar=densvar):
     print('singles map analysis')
     # drop doublon shots, if they exist
     if is_doublon:
         df = df.loc[df[blowdetvar] != 610]
     # loop over densities/temperatures
-    dvars = np.unique(df[densvar])
+    dvars = np.unique(df[grpvar])
     # tvars = np.unique(df[tempvar])
     output = np.zeros((len(dvars), nx, ny))
     for idv, dv in enumerate(dvars):
-        dfd = df.loc[(df[densvar]==dv)]
+        dfd = df.loc[(df[grpvar]==dv)]
         dfs = {bid: dfd.loc[dfd[blowvar] == bid] for bid in range(3)}
         amats = {bid: amat[dfs[bid].index] for bid in range(3)}
+        # print('here')
         means = {bid: amats[bid].mean(axis=0) for bid in range(3)}
+        # print(means)
         output[idv] = p_avg_weight*means[0]+(1-p_avg_weight)*(means[1]+means[2])
     return dvars, output
 
-def doublon_map_analysis(df, amat, is_doublon):
+def doublon_map_analysis(df, amat, is_doublon, grpvar=densvar):
     print('doublon map analysis')
     # keep doublon shots
     df = df.loc[df[blowdetvar] == 610]
     # loop over densities/temperatures
-    dvars = np.unique(df[densvar])
+    dvars = np.unique(df[grpvar])
     # tvars = np.unique(df[tempvar])
     output = np.zeros((len(dvars), nx, ny))
     for idv, dv in enumerate(dvars):
-        dfd = df.loc[(df[densvar]==dv)]
+        dfd = df.loc[(df[grpvar]==dv)]
         amatd = amat[dfd.index]
         output[idv] = amatd.mean(axis=0)
     return output
 
-def CLr_analysis(df, amat, is_doublon, period, dataset, center1, plot=False):
+def CLr_analysis(df, amat, is_doublon, period, dataset, center1, plot=False, grpvar=densvar):
     print('CLr analysis')
     # define the mask
     stripe_peak = center1[1]-period/2
@@ -167,11 +169,11 @@ def CLr_analysis(df, amat, is_doublon, period, dataset, center1, plot=False):
     if is_doublon:
         df = df.loc[df[blowdetvar] != 610]
     # loop over densities/temperatures
-    dvars = np.unique(df[densvar])
+    dvars = np.unique(df[grpvar])
     # tvars = np.unique(df[tempvar])
     output = np.zeros((len(dvars), 2, nx, ny)) # second axis for nom/std
     for idv, dv in enumerate(dvars):
-        dfd = df.loc[(df[densvar]==dv)]
+        dfd = df.loc[(df[grpvar]==dv)]
         pp_c = {}
         for bid in range(3):
             dfb = dfd.loc[dfd[blowvar]==bid]
@@ -196,7 +198,7 @@ def CLr_analysis(df, amat, is_doublon, period, dataset, center1, plot=False):
         plt.show()
     return output
 
-def CLR_analysis(df, amat, is_doublon, period, dataset, center1, plot=False):
+def CLR_analysis(df, amat, is_doublon, period, dataset, center1, plot=False, grpvar=densvar):
     print('CLR analysis')
     # define the mask
     stripe_peak = center1[1]-period/2
@@ -215,15 +217,18 @@ def CLR_analysis(df, amat, is_doublon, period, dataset, center1, plot=False):
     if is_doublon:
         df = df.loc[df[blowdetvar] != 610]
     # loop over densities/temperatures
-    dvars = np.unique(df[densvar])
+    dvars = np.unique(df[grpvar])
+    # print('hereee')
+    # print(dvars)
     # tvars = np.unique(df[tempvar])
     output = np.zeros((len(dvars), 2, nx, ny)) # second axis for nom/std
     for idv, dv in enumerate(dvars):
-        dfd = df.loc[(df[densvar]==dv)]
+        dfd = df.loc[(df[grpvar]==dv)]
         pp_c = {}
         for bid in range(3):
             dfb = dfd.loc[dfd[blowvar]==bid]
             amatb = amat[dfb.index]
+            # print(dv,bid)
             comp = pp_correlation_map_chunk_chunk(amatb, weights, weights1, nboot=500, verbose=False, print_times=False)
             comp.run(bins=None)
             pp_c[bid] = comp.A[comp.obshash['fpp_c']]
@@ -237,7 +242,7 @@ def CLR_analysis(df, amat, is_doublon, period, dataset, center1, plot=False):
     # plt.show()
     return output
 
-def PCA_analysis(df, amat, is_doublon, period, dataset, center1, plot=False, neig=6):
+def PCA_analysis(df, amat, is_doublon, period, dataset, center1, plot=False, neig=6, grpvar=densvar):
     print('PCA analysis')
     # Xmax = (10**2-(period)**2)**0.5-1
     # Xmax = int(Xmax)
@@ -252,7 +257,7 @@ def PCA_analysis(df, amat, is_doublon, period, dataset, center1, plot=False, nei
     if is_doublon:
         df = df.loc[df[blowdetvar] != 610]
     # loop over densities/temperatures
-    dvars = np.unique(df[densvar])
+    dvars = np.unique(df[grpvar])
     # tvars = np.unique(df[tempvar])
     outputv = np.zeros((len(dvars), neig, 2*Xmax+1, 2*period))
     outputw = np.zeros((len(dvars), neig))
@@ -260,7 +265,7 @@ def PCA_analysis(df, amat, is_doublon, period, dataset, center1, plot=False, nei
     sign = (-1)**(xx+yy)
     sign = sign.ravel()
     for idv, dv in enumerate(dvars):
-        dfd = df.loc[(df[densvar]==dv)]
+        dfd = df.loc[(df[grpvar]==dv)]
         pp_c = {}
         for bid in range(3):
             dfb = dfd.loc[dfd[blowvar]==bid]
@@ -304,7 +309,7 @@ def PCA_analysis(df, amat, is_doublon, period, dataset, center1, plot=False, nei
         plt.show()
     return outputw, outputv
 
-def singles_avg_analysis(df, amat, is_doublon, period, center1):
+def singles_avg_analysis(df, amat, is_doublon, period, center1, grpvar=densvar):
     print('singles avg analysis')
     Xmax = 6
     roi_avg = np.s_[:, center1[0]-Xmax:center1[0]+Xmax+1, center1[1]-period:center1[1]+period]
@@ -313,11 +318,11 @@ def singles_avg_analysis(df, amat, is_doublon, period, center1):
     if is_doublon:
         df = df.loc[df[blowdetvar] != 610]
     # loop over densities/temperatures
-    dvars = np.unique(df[densvar])
+    dvars = np.unique(df[grpvar])
     # tvars = np.unique(df[tempvar])
     output = np.zeros((len(dvars), 3, 2))
     for idv, dv in enumerate(dvars):
-        dfd = df.loc[(df[densvar]==dv)]
+        dfd = df.loc[(df[grpvar]==dv)]
         for bid in range(3):
             dfb = dfd.loc[dfd[blowvar]==bid]
             amatb = amat[dfb.index].astype(float)
@@ -330,7 +335,7 @@ def singles_avg_analysis(df, amat, is_doublon, period, center1):
     output = np.array([unp.nominal_values(uout), unp.std_devs(uout)]).T
     return output
 
-def doublons_avg_analysis(df, amat, period, center1):
+def doublons_avg_analysis(df, amat, period, center1, grpvar=densvar):
     print('doublon avg analysis')
     Xmax = 6
     roi_avg = np.s_[:, center1[0]-Xmax:center1[0]+Xmax+1, center1[1]-period:center1[1]+period]
@@ -338,11 +343,11 @@ def doublons_avg_analysis(df, amat, period, center1):
     amat = amat.mean(axis=(1,2))
     df = df.loc[df[blowdetvar] == 610]
     # loop over densities/temperatures
-    dvars = np.unique(df[densvar])
+    dvars = np.unique(df[grpvar])
     # tvars = np.unique(df[tempvar])
     output = np.zeros((len(dvars), 2))
     for idv, dv in enumerate(dvars):
-        dfd = df.loc[(df[densvar]==dv)]
+        dfd = df.loc[(df[grpvar]==dv)]
         amatb = amat[dfd.index].astype(float)
         m = amatb.mean()
         s = amatb.std()/len(amatb)**0.5
@@ -362,7 +367,7 @@ def inspect_group(df, amat, is_doublon):
     ax.legend()
     plt.show()
 
-def analyze_scan_group(scan_group, dataset):
+def analyze_scan_group(scan_group, dataset, grpvar=densvar):
     all_data = {} # object in which we put data
     is_doublon = scan_group['is_doublon_resolved']
     period = scan_group['period']
@@ -393,28 +398,29 @@ def analyze_scan_group(scan_group, dataset):
     # # inspect
     # inspect_group(df, amat, is_doublon)
     # singles analysis
-    dvars, singles_data = singles_map_analysis(df, amat, is_doublon)
+    dvars, singles_data = singles_map_analysis(df, amat, is_doublon, grpvar=grpvar)
     all_data['singles_map'] = singles_data
     all_data['densvar'] = dvars
-    singles_avg = singles_avg_analysis(df, amat, is_doublon, period, center1)
+    singles_avg = singles_avg_analysis(df, amat, is_doublon, period, center1, grpvar=grpvar)
     all_data['singles_avg'] = singles_avg
     # doublon
     if is_doublon:
-        doublon_data = doublon_map_analysis(df, amat, is_doublon)
+        doublon_data = doublon_map_analysis(df, amat, is_doublon, grpvar=grpvar)
         all_data['doublon_map'] = doublon_data
-        doublon_avg = doublons_avg_analysis(df, amat, period, center1)
+        doublon_avg = doublons_avg_analysis(df, amat, period, center1, grpvar=grpvar)
         all_data['doublon_avg'] = doublon_avg
     # CLr analysis
-    CLr = CLr_analysis(df, amat, is_doublon, period, dataset, center1)
+    CLr = CLr_analysis(df, amat, is_doublon, period, dataset, center1, grpvar=grpvar)
     all_data['CLr'] = CLr
     # # CLR analysis
-    CLR = CLR_analysis(df, amat, is_doublon, period, dataset, center1)
+    CLR = CLR_analysis(df, amat, is_doublon, period, dataset, center1, grpvar=grpvar)
     all_data['CLR'] = CLR
     # PCA analysis
-    PCAw, PCAv = PCA_analysis(df, amat, is_doublon, period, dataset, center1)
+    PCAw, PCAv = PCA_analysis(df, amat, is_doublon, period, dataset, center1, grpvar=grpvar)
     all_data['PCAw'] = PCAw
     all_data['PCAv'] = PCAv
     return all_data
+
 
 # todo
 # singles and doublons, averaged in the ROI
@@ -422,34 +428,40 @@ def analyze_scan_group(scan_group, dataset):
 
 for dataset in scan_groups:
     print('analyzing {}'.format(dataset))
-    processed_data = analyze_scan_group(scan_groups[dataset], dataset)
-    # save stuff
-    singles_map = processed_data['singles_map']
-    dvars = processed_data['densvar']
-    np.save('processed/{}_singles_map'.format(dataset), singles_map)
-    np.save('processed/{}_densvar'.format(dataset), dvars)
-    singles_avg = processed_data['singles_avg']
-    np.save('processed/{}_singles_avg'.format(dataset), singles_avg)
-    if scan_groups[dataset]['is_doublon_resolved']:
-        doublon_map = processed_data['doublon_map']
-        np.save('processed/{}_doublon_map'.format(dataset), doublon_map)
-        doublon_avg = processed_data['doublon_avg']
-        np.save('processed/{}_doublon_avg'.format(dataset), doublon_avg)
-        doublon_fidelity = processed_data['doublon_fidelity']
-        np.save('processed/{}_doublon_fidelity'.format(dataset), np.array([doublon_fidelity.n, doublon_fidelity.s]))
-    CLr = processed_data['CLr']
-    # print('HERE')
-    # print(CLr.shape)
-    # fig, ax = plt.subplots()
-    # ax.imshow(CLr[0,0])
-    # plt.show()
-    np.save('processed/{}_CLr'.format(dataset), CLr)
-    CLR = processed_data['CLR']
-    np.save('processed/{}_CLR_avg'.format(dataset), CLR)
-    PCAw = processed_data['PCAw']
-    PCAv = processed_data['PCAv']
-    np.save('processed/{}_PCAw'.format(dataset), PCAw)
-    np.save('processed/{}_PCAv'.format(dataset), PCAv)
+    if dataset == 'Jun_22_pd8_vp1p5_vs_temp':
+        if dataset == 'Jun_22_pd8_vp1p5_vs_temp':
+            processed_data = analyze_scan_group(scan_groups[dataset], dataset, grpvar=tempvar)
+            dvars = processed_data['densvar']
+            np.save('processed/{}_tempvar'.format(dataset), dvars)
+        else:
+            processed_data = analyze_scan_group(scan_groups[dataset], dataset, grpvar=densvar)
+            dvars = processed_data['densvar']
+            np.save('processed/{}_densvar'.format(dataset), dvars)
+        # save stuff
+        singles_map = processed_data['singles_map']
+        np.save('processed/{}_singles_map'.format(dataset), singles_map)
+        singles_avg = processed_data['singles_avg']
+        np.save('processed/{}_singles_avg'.format(dataset), singles_avg)
+        if scan_groups[dataset]['is_doublon_resolved']:
+            doublon_map = processed_data['doublon_map']
+            np.save('processed/{}_doublon_map'.format(dataset), doublon_map)
+            doublon_avg = processed_data['doublon_avg']
+            np.save('processed/{}_doublon_avg'.format(dataset), doublon_avg)
+            doublon_fidelity = processed_data['doublon_fidelity']
+            np.save('processed/{}_doublon_fidelity'.format(dataset), np.array([doublon_fidelity.n, doublon_fidelity.s]))
+        CLr = processed_data['CLr']
+        # print('HERE')
+        # print(CLr.shape)
+        # fig, ax = plt.subplots()
+        # ax.imshow(CLr[0,0])
+        # plt.show()
+        np.save('processed/{}_CLr'.format(dataset), CLr)
+        CLR = processed_data['CLR']
+        np.save('processed/{}_CLR_avg'.format(dataset), CLR)
+        PCAw = processed_data['PCAw']
+        PCAv = processed_data['PCAv']
+        np.save('processed/{}_PCAw'.format(dataset), PCAw)
+        np.save('processed/{}_PCAv'.format(dataset), PCAv)
 plt.show()
 
 
