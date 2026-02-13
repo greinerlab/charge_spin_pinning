@@ -438,9 +438,14 @@ for dataset in scan_groups:
         doublon_fidelity = processed_data['doublon_fidelity']
         np.save('processed/{}_doublon_fidelity'.format(dataset), np.array([doublon_fidelity.n, doublon_fidelity.s]))
     CLr = processed_data['CLr']
+    # print('HERE')
+    # print(CLr.shape)
+    # fig, ax = plt.subplots()
+    # ax.imshow(CLr[0,0])
+    # plt.show()
     np.save('processed/{}_CLr'.format(dataset), CLr)
     CLR = processed_data['CLR']
-    np.save('processed/{}_CLR'.format(dataset), CLR)
+    np.save('processed/{}_CLR_avg'.format(dataset), CLR)
     PCAw = processed_data['PCAw']
     PCAv = processed_data['PCAv']
     np.save('processed/{}_PCAw'.format(dataset), PCAw)
