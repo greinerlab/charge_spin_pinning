@@ -9,6 +9,20 @@ from scipy.interpolate import interp1d, griddata
 
 import yaml
 
+import matplotlib as mpl
+mpl.rcParams['font.family'] = 'sans-serif'
+mpl.rcParams['font.sans-serif'] = 'Helvetica'
+mpl.rcParams['font.size'] = 6
+mpl.rcParams['axes.labelpad'] = 0
+mpl.rcParams['axes.labelsize'] = 6
+mpl.rcParams['axes.titlepad'] = 0
+mpl.rcParams['axes.titlesize'] = 6
+mpl.rcParams['ytick.major.pad'] = 1
+mpl.rcParams['ytick.minor.pad'] = 1
+mpl.rcParams['xtick.major.pad'] = 1
+mpl.rcParams['xtick.minor.pad'] = 1
+mpl.rcParams['lines.markeredgewidth'] = 1.5
+mpl.rcParams['lines.markersize'] = 4.5
 
 
 
@@ -17,7 +31,8 @@ fig_, ax_ = plt.subplots(nrows=3, sharex=True, figsize=(6, 8))
 
 
 # df_exp_cal = pd.read_csv("W:\\RunLog\\2025\\exp_n_to_ns_590.0.csv")
-df_exp_cal = pd.read_csv(os.path.join('/Volumes','share','FileServer','RunLog','2025','exp_n_to_ns_590.0.csv'))
+# df_exp_cal = pd.read_csv(os.path.join('/Volumes','share','FileServer','RunLog','2025','exp_n_to_ns_590.0.csv'))
+df_exp_cal = pd.read_csv(os.path.join('aux','exp_n_to_ns_590.0.csv'))
 ns_to_n = interp1d(df_exp_cal['ns'], df_exp_cal['n'])
 
 def get_vals(dataset, ax_, is_compensated):
@@ -157,7 +172,7 @@ plt.show()
 
 
 def make_2d_plot(dopings, wavevectors, vals, vm=0.3):
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(3, 2))
     for i in range(len(dopings)):
         if i==0:
             d_l = -0.01
@@ -178,24 +193,69 @@ def make_2d_plot(dopings, wavevectors, vals, vm=0.3):
         # print(dopings2)
         # print(wavevectors2)
         im=ax.pcolormesh(dopings2.T, wavevectors2.T, k.reshape(-1,1), vmin=0, vmax=vm, cmap='viridis')
-    ax.set_ylabel('Wavevector')
+    ax.set_ylabel('Wavenumber')
     ax.set_xlabel('Doping')
     fig.colorbar(im)
     return fig, ax
 
 
-fig,ax = make_2d_plot(dopings, wavevectors, kappa_s, 0.3)
-ax.set_title('Singles')
+# fig,ax = make_2d_plot(dopings, wavevectors, kappa_s, 0.3)
+# ax.set_title('Singles')
 fig,ax = make_2d_plot(dopings, wavevectors, kappa_n, 0.4)
-ax.set_title('Density')
+# ax.set_title('Density')
 x = np.linspace(0,1,num=20)
-ax.plot(x, x, ls='--', c='r')
-ax.plot(x, 2*x, ls='--', c='r')
+# ax.plot(x, x, ls='--', c='r')
+# ax.plot(x, 2*x, ls='--', c='r')
+ax.plot(x, x, ls='--', c='k', alpha=0.5)
+ax.plot(x, 2*x, ls='--', c='k', alpha=0.5)
 ax.set_xlim([-0.01,0.41])
 ax.set_ylim([0,0.27])
 
-fig,ax = make_2d_plot(dopings, wavevectors, kappa_d, 0.1)
-ax.set_title('Doublons')
+# fitting
+# print(dopings.shape)
+# print(wavevectors.shape)
+# print(kappa_n.shape)
+# def fitfunc(x, xi, A, ofs):
+#     return ofs+A/xi**2/(x**2+1/xi**2)
+# def fitfunc(x, qf, A):
+#     return A*qf**2/(x**2+qf**2)
+def fitfunc(x, qf, A):
+    return A*(1-x**2/(2*qf)**2)
+xiv = []
+xie = []
+dv = []
+for i, dop in enumerate(dopings):
+    kp = kappa_n[i]
+    kpe = kappa_n_err[i]
+    q = wavevectors[i]
+    # fig, ax = plt.subplots()
+    # ax.errorbar(q, kp, yerr=kpe)
+    # p0 = [2, np.max(kp)-np.min(kp), np.min(kp)]
+    p0 = [1/10, np.max(kp)]
+    try:
+        bounds = ([0, 0], [np.max(q)*2, np.max(kp)*2+0.1])
+        print(bounds)
+        popt, pcov = curve_fit(fitfunc, q, kp, sigma=kpe, absolute_sigma=True, p0=p0, bounds=bounds)
+        # print(popt)
+        # fitted = fitfunc(q, *popt)
+        xiv.append(popt[0])
+        xie.append(pcov[0,0]**0.5)
+        dv.append(dop)
+    except:
+        print('failed at '+str(dop))
+    # ax.plot(q, fitted)
+    # ax.set_title(dop)
+    # plt.show()
+
+plt.savefig('plots/kappa_vs_d_q.pdf', dpi=600, transparent=True, bbox_inches='tight')
+# fig, ax = plt.subplots()
+ax.errorbar(dv, xiv, yerr=xie, ls='', marker='', c='k', capsize=4)
+# plt.show()
+plt.savefig('plots/kappa_vs_d_q_corr.pdf', dpi=600, transparent=True, bbox_inches='tight')
+
+
+# fig,ax = make_2d_plot(dopings, wavevectors, kappa_d, 0.1)
+# ax.set_title('Doublons')
 
 
 
